@@ -1,0 +1,12 @@
+FROM centos:7
+RUN yum install openjdk-11-jre -y
+ADD https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99.tar.gz
+RUN tar -xzf tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99 -C /opt
+WORKDIR /opt/apache-tomcat-8.5.99/
+COPY context.xml conf/context.xml
+COPY student.war webapps/student.war
+COPY mysql-connector.jar lib/mysql-connector.jar
+ENTRYPOINT ["/bin/catalina.sh"]
+CMD ["RUN"]
+
+
